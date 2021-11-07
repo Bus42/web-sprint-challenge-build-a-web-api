@@ -3,10 +3,17 @@ const express = require('express');
 const projectsRouter = express.Router();
 const { get, insert, update, remove } = require('./projects-model');
 
+projectsRouter.get(`/`, (req, res) => {
+    get()
+        .then(projects => {
+            res.status(200).send(projects || []);
+        }).catch(err => res.status(500).send(err))
+})
+
 projectsRouter.get(`/:id`, (req, res) => {
     get(req.params.id)
         .then(project => {
-            res.status(200).send(project || []);
+            res.status(200).send(project);
         }).catch(err => res.status(500).send(err))
 })
 
