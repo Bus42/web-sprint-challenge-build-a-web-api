@@ -51,7 +51,7 @@ projectsRouter.put(`/:id`, verifyId, verifyRequestBody, (req, res) => {
 projectsRouter.delete(`/:id`, verifyId, (req, res) => {
     remove(req.params.id)
         .then(() => {
-            res.status(200).send(`Project ${req.params.id} deleted`);
+            res.status(200).end();
         }).catch(err => res.status(500).send(err))
 })
 
