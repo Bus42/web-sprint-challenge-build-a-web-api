@@ -4,6 +4,13 @@ const { verifyRequestBody, verifyId } = require('./projects-middleware');
 const { get, insert, update, remove } = require('./projects-model');
 
 const projectsRouter = express.Router();
+
+function omitActions(project) {
+    const pureProject = { ...project };
+    delete pureProject.actions;
+    return pureProject;
+}
+
 projectsRouter.use(express.json());
 
 projectsRouter.get(`/`, (req, res) => {
@@ -16,14 +23,14 @@ projectsRouter.get(`/`, (req, res) => {
 projectsRouter.get(`/:id`, verifyId, (req, res) => {
     get(req.params.id)
         .then(project => {
-            res.status(200).send(project);
+            res.status(200).send(omitActions(project));
         }).catch(err => res.status(500).send(err))
 })
 
 projectsRouter.get(`/:id/actions`, verifyId, (req, res) => {
     get(req.params.id)
         .then(project => {
-            res.status(200).send(project);
+            res.status(200).send(project.actions || []);
         }).catch(err => res.status(500).send(err))
 })
 

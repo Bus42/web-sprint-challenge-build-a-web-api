@@ -4,7 +4,7 @@ const { get } = require("./projects-model");
 function verifyRequestBody(req, res, next) {
     const { name, description } = req.body;
     if (!name || !description) {
-        return res.status(404).json({
+        return res.status(400).json({
             error: 'name and description are required fields'
         });
     } else {

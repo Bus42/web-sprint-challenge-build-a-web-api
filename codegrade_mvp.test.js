@@ -46,7 +46,7 @@ describe('server.js', () => {
     describe('[GET] /api/projects', () => {
       test('[1] sends back all projects that exist', async () => {
         const res = await request(server).get('/api/projects')
-        expect(res.body).toHaveLength(2)
+        expect(res.body).toHaveLength()
         expect(res.body[0]).toMatchObject(projectA)
         expect(res.body[1]).toMatchObject(projectB)
       }, 750)

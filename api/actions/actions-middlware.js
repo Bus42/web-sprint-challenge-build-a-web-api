@@ -4,7 +4,7 @@ const { get } = require("./actions-model");
 function verifyRequestBody(req, res, next) {
     const { project_id, description, notes } = req.body;
     if (!project_id || !description || !notes) {
-        return res.status(404).json({
+        return res.status(400).json({
             error: 'please fill out all required fields'
         });
     } else {
