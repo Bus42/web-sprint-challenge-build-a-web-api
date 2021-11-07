@@ -1,8 +1,10 @@
 // Write your "projects" router here!
 const express = require('express');
 const { verifyRequestBody, verifyId } = require('./projects-middleware');
-const projectsRouter = express.Router();
 const { get, insert, update, remove } = require('./projects-model');
+
+const projectsRouter = express.Router();
+projectsRouter.use(express.json());
 
 projectsRouter.get(`/`, (req, res) => {
     get()
