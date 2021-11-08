@@ -18,15 +18,14 @@ async function verifyId(req, res, next) {
         return res.status(404).json({
             error: 'id is required'
         });
-    } else {
-        await get(id)
-            .then(response => {
-                return response ? next() : res.status(404).send({ "message": "action with provided id could not be found" })
-            })
-            .catch(() => {
-                res.status(500).send({ "message": "error occured while fetching action" })
-            });
     }
+    await get(id)
+        .then(response => {
+            return response ? next() : res.status(404).send({ "message": "action with provided id could not be found" })
+        })
+        .catch(() => {
+            res.status(500).send({ "message": "error occured while fetching action" })
+        });
 }
 
 module.exports = {

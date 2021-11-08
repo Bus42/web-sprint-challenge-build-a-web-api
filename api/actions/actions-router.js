@@ -48,10 +48,12 @@ actionsRouter.post('/', verifyRequestBody, async (req, res) => {
 })
 
 actionsRouter.put('/:id', verifyId, verifyRequestBody, (req, res) => {
+    const id = req.params.id;
     const action = req.body;
-    update(action)
-        .then(action => {
-            res.status(200).send(action);
+    update(id, action)
+        .then(response => {
+            console.log(response)
+            res.status(200).send(response);
         })
         .catch(() => {
             res.status(500).send({ message: 'Failed to update action' });

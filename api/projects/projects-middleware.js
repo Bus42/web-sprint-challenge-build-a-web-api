@@ -15,7 +15,7 @@ function verifyRequestBody(req, res, next) {
 async function verifyId(req, res, next) {
     const { id } = req.params;
     if (!id) {
-        return res.status(404).json({
+        return res.status(400).json({
             error: 'id is required'
         });
     } else {
